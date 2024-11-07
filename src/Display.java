@@ -1,10 +1,8 @@
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Display extends JPanel implements Runnable{
     private final String title;
@@ -14,11 +12,27 @@ public class Display extends JPanel implements Runnable{
 
     public Thread screenThread = new Thread(this);
 
+    //testing (to be removed)
+    Book[] books = new Book[7];
+    Book book1 = new Book("Book1", "Fantasy", 10);
+    Font arialFont_20;
+    //----------------------
+
     public Display(String title, int width, int height){
         this.title = title;
         this.screenWidth = width;
         this.screenHeight = height;
+        arialFont_20 = new Font("Arial", Font.PLAIN, 20);
 
+        books[0] = new Book("Book1", "Fantasy", 7);
+        books[1] = new Book("Book2", "Mystery", 4);
+        books[2] = new Book("Book3", "Mystery", 8);
+        books[3] = new Book("Book4", "Horror", 3);
+        books[4] = new Book("Book5", "Computer Science", 5);
+        books[5] = new Book("Book6", "Computer Science", 4);
+        books[6] = new Book("Book7", "History", 4);
+
+        screenThread.start();
         createDisplay();
     }
 
@@ -30,7 +44,7 @@ public class Display extends JPanel implements Runnable{
         window.setLocationRelativeTo(null);
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.white);
+        this.setBackground(new Color(43, 45, 48));
         this.setDoubleBuffered(true);
         this.setFocusable(true);
 
@@ -47,7 +61,15 @@ public class Display extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
+        // Set rendering hints for smooth scaling
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
         //things to be drawn
+        for(int i = 0; i < books.length; i++){
+            g2d.drawImage(books[0].getImage(), 30 + (130 * i), 30, null);
+        }
 
         g2d.dispose();
 
@@ -56,13 +78,10 @@ public class Display extends JPanel implements Runnable{
     @Override
     public void run() {
         double drawInterval = (1000000000.0) / FPS, delta = 0;
-        long lastTime = System.nanoTime(), timer = 0, currentTime;
-        int frames = 0;
-
+        long lastTime = System.nanoTime(), currentTime;
         while(screenThread.isAlive()){
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
-            timer += currentTime - lastTime;
             lastTime = currentTime;
 
             if(delta >= 1) {
@@ -73,12 +92,6 @@ public class Display extends JPanel implements Runnable{
                 repaint();
 
                 delta--;
-                frames++;
-            }
-            if(timer >= 1000000000){
-                System.out.println("FPS: " + frames);
-                frames = 0;
-                timer = 0;
             }
         }
     }
