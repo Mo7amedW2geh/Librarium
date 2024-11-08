@@ -3,6 +3,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Display extends JPanel implements Runnable{
     private final String title;
@@ -13,24 +15,12 @@ public class Display extends JPanel implements Runnable{
     public Thread screenThread = new Thread(this);
 
     //testing (to be removed)
-    Book[] books = new Book[7];
-    Book book1 = new Book("Book1", "Fantasy", 10);
-    Font arialFont_20;
-    //----------------------
+    Font arialFont_20 = new Font("Arial", Font.PLAIN, 20);
 
     public Display(String title, int width, int height){
         this.title = title;
         this.screenWidth = width;
         this.screenHeight = height;
-        arialFont_20 = new Font("Arial", Font.PLAIN, 20);
-
-        books[0] = new Book("Book1", "Fantasy", 7);
-        books[1] = new Book("Book2", "Mystery", 4);
-        books[2] = new Book("Book3", "Mystery", 8);
-        books[3] = new Book("Book4", "Horror", 3);
-        books[4] = new Book("Book5", "Computer Science", 5);
-        books[5] = new Book("Book6", "Computer Science", 4);
-        books[6] = new Book("Book7", "History", 4);
 
         screenThread.start();
         createDisplay();
@@ -67,8 +57,13 @@ public class Display extends JPanel implements Runnable{
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
         //things to be drawn
-        for(int i = 0; i < books.length; i++){
-            g2d.drawImage(books[0].getImage(), 30 + (130 * i), 30, null);
+        int count = 0;
+        for(var category: Book.books.keySet()){
+            for(var i: Book.books.get(category)){
+                int col = count % 7, row = count / 7;
+                g2d.drawImage(i.getImage(), 30 + (130 * col), 30 + (160 * row), null);
+                count++;
+            }
         }
 
         g2d.dispose();
