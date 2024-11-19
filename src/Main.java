@@ -13,5 +13,6 @@ public class Main {
         new Book("Book6", "Fantasy", "des", 7);
         new Book("Book7", "Fantasy", "des", 7);
         new Book("Book8", "Fantasy", "des", 7);
+        new Book("Book9", "Fantasy", "des", 7);
     }
 }
