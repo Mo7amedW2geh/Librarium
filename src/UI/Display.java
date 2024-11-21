@@ -1,28 +1,31 @@
+package UI;
+
+import core.Book;
+import core.Data;
+import core.Main;
+import input.MouseManager;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class Display extends JPanel implements Runnable{
+public class Display extends JPanel{
+
+    private final Main main;
     private final String title;
     private final int screenWidth;
     private final int screenHeight;
-    private static final int FPS = 60;
 
-    public Thread screenThread = new Thread(this);
 
-    //testing (to be removed)
-    Font arialFont_20 = new Font("Arial", Font.PLAIN, 20);
+    public MouseManager mouseManager = new MouseManager();
 
-    public Display(String title, int width, int height){
+    public Display(String title, int width, int height, Main main){
         this.title = title;
         this.screenWidth = width;
         this.screenHeight = height;
+        this.main = main;
 
-        screenThread.start();
         createDisplay();
     }
 
@@ -38,13 +41,35 @@ public class Display extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.setFocusable(true);
 
+        //button test
+//        JButton button = new JButton("here");
+//        button.setBounds(70, 400, 70, 30);
+//        button.addActionListener( e -> System.out.println("from button"));
+//
+//        button.setFont(new Font("Arial", Font.BOLD, 14));
+//        button.setForeground(Color.WHITE);
+//        button.setBackground(new Color(70, 130, 180));
+//
+//        button.setBorderPainted(false);
+//        button.setFocusPainted(false);
+//        button.setContentAreaFilled(false);
+//        button.setOpaque(true);
+//
+//        button.addMouseListener(new java.awt.event.MouseAdapter() {
+//            public void mouseEntered(java.awt.event.MouseEvent evt) {
+//                button.setBackground(new Color(100, 118, 237)); // Hover color
+//            }
+//
+//            public void mouseExited(java.awt.event.MouseEvent evt) {
+//                button.setBackground(new Color(70, 130, 180)); // Original color
+//            }
+//        });
+//
+//        this.add(button);
+
         window.add(this);
         window.pack();
         window.setVisible(true);
-    }
-
-    public void update(){
-
     }
 
     public void paintComponent(Graphics g){
@@ -57,37 +82,7 @@ public class Display extends JPanel implements Runnable{
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
         //things to be drawn
-        int count = 0;
-        for(var category: Book.books.keySet()){
-            for(var i: Book.books.get(category)){
-                int col = count % 7, row = count / 7;
-                g2d.drawImage(i.getImage(), 30 + (130 * col), 30 + (160 * row), null);
-                count++;
-            }
-        }
+        main.screen.draw(g2d);
 
-        g2d.dispose();
-
-    }
-
-    @Override
-    public void run() {
-        double drawInterval = (1000000000.0) / FPS, delta = 0;
-        long lastTime = System.nanoTime(), currentTime;
-        while(screenThread.isAlive()){
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
-            lastTime = currentTime;
-
-            if(delta >= 1) {
-                //Update information like player position
-                this.update();
-
-                //draw the screen with the updated information
-                repaint();
-
-                delta--;
-            }
-        }
     }
 }
