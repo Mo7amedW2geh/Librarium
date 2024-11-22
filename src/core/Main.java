@@ -14,7 +14,7 @@ public class Main implements Runnable {
 
     //Main panel
     public Main() {
-        display = new Display("test", 940, 540, this);
+        display = new Display("Library", 940, 540, this);
         display.addMouseListener(mouseManager);
         display.addMouseMotionListener(mouseManager);
     }

@@ -33,11 +33,6 @@ public class Data {
         }
     }
 
-    // Static block to initialize books on program start
-//    static {
-//        loadBooksFromFile();
-//    }
-
     // Load default books (initial setup if no file exists)
     private static void loadDefaultBooks() {
         new Book("Book1", "Mystery", "des", 7, "/books/Book1.png");

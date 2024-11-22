@@ -1,14 +1,12 @@
 package UI;
 
-import core.Book;
-import core.Data;
+
 import core.Main;
 import input.MouseManager;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Display extends JPanel{
 
@@ -29,7 +27,7 @@ public class Display extends JPanel{
         createDisplay();
     }
 
-    public void createDisplay(){
+    private void createDisplay(){
         JFrame window = new JFrame(title);
         window.setSize(screenWidth, screenHeight);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,32 +38,6 @@ public class Display extends JPanel{
         this.setBackground(new Color(43, 45, 48));
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-
-        //button test
-//        JButton button = new JButton("here");
-//        button.setBounds(70, 400, 70, 30);
-//        button.addActionListener( e -> System.out.println("from button"));
-//
-//        button.setFont(new Font("Arial", Font.BOLD, 14));
-//        button.setForeground(Color.WHITE);
-//        button.setBackground(new Color(70, 130, 180));
-//
-//        button.setBorderPainted(false);
-//        button.setFocusPainted(false);
-//        button.setContentAreaFilled(false);
-//        button.setOpaque(true);
-//
-//        button.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseEntered(java.awt.event.MouseEvent evt) {
-//                button.setBackground(new Color(100, 118, 237)); // Hover color
-//            }
-//
-//            public void mouseExited(java.awt.event.MouseEvent evt) {
-//                button.setBackground(new Color(70, 130, 180)); // Original color
-//            }
-//        });
-//
-//        this.add(button);
 
         window.add(this);
         window.pack();

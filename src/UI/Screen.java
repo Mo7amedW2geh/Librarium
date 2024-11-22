@@ -1,6 +1,7 @@
 package UI;
 
 import core.Book;
+import core.BookPurchases;
 import core.Data;
 import input.MouseManager;
 
@@ -12,6 +13,7 @@ import static UI.Assets.*;
 
 public class Screen {
     //Screen Settings
+    private boolean wasMousePressed = false;
     public static final int screenWidth = 940;
     public static final int screenHeight= 540;
     public static final int FPS = 60;
@@ -19,6 +21,7 @@ public class Screen {
     //Screen Objects
     private Book currentBook = null;
     private MouseManager mouseManager;
+    BookPurchases bookPurchases;
 
     public Screen(MouseManager mouseManager){
         this.mouseManager = mouseManager;
@@ -31,7 +34,7 @@ public class Screen {
             for(ArrayList<Book> value : Data.books.values()){
                 for(Book book : value){
                     int col = count % 7, row = count / 7;
-                    int x = 20 + (130 * col), y = 50 + (160 * row), width = 120, height = 150;
+                    int x = 20 + (130 * col), y = 20 + (160 * row), width = 120, height = 150;
 
                     g2d.drawImage(book.getImage(), x, y, width, height, null);
                     count++;
@@ -47,12 +50,24 @@ public class Screen {
 
             g2d.setFont(Arial_14);
             g2d.drawString(currentBook.getDescription(), 320, 140);
+
+            g2d.drawString("Borrowed: " + currentBook.borrowed, 320, 220);
+            g2d.drawString("Quantity: " + currentBook.quantity, 460, 220);
+
+            g2d.drawString("Borrow", 350, 350);
+            g2d.drawRect(340, 330, 65, 30);
+
+            g2d.drawString("Buy", 560, 350);
+            g2d.drawRect(540, 330, 65, 30);
+
+            g2d.drawString("Return", 750, 350);
+            g2d.drawRect(740, 330, 65, 30);
         }
     }
 
     public void update(){
 
-        if(mouseManager.isLeftPressed() && currentBook == null){
+        if(mouseManager.isLeftPressed() && currentBook == null && !wasMousePressed){
             int mouseX = mouseManager.getMouseX();
             int mouseY = mouseManager.getMouseY();
 
@@ -60,29 +75,40 @@ public class Screen {
             for (ArrayList<Book> value : Data.books.values()) {
                 for (Book book : value) {
                     int col = count % 7, row = count / 7;
-                    int x = 20 + (130 * col), y = 50 + (160 * row), width = 120, height = 150;
+                    int x = 20 + (130 * col), y = 20 + (160 * row), width = 120, height = 150;
 
                     // Check if the mouse click is within this book's bounds
                     if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) {
-                        currentBook = book;
+                        setBook(book);
                     }
 
                     count++;
                 }
             }
-        }else if(mouseManager.isLeftPressed() && currentBook != null){
+        }else if(mouseManager.isLeftPressed() && currentBook != null && !wasMousePressed){
             int mouseX = mouseManager.getMouseX();
             int mouseY = mouseManager.getMouseY();
 
             if (mouseX >= 20 && mouseX <= 50 && mouseY >= 20 && mouseY <= 50) {
                 currentBook = null;
             }
+            if (mouseX >= 340 && mouseX <= 340 + 65 && mouseY >= 330 && mouseY <= 330 + 30) {
+                bookPurchases.borrow();
+            }
+            if (mouseX >= 540 && mouseX <= 540 + 65 && mouseY >= 330 && mouseY <= 330 + 30) {
+                bookPurchases.buy(1);
+            }
+            if (mouseX >= 740 && mouseX <= 740 + 65 && mouseY >= 330 && mouseY <= 330 + 30) {
+                bookPurchases.returnBook();
+            }
         }
 
+        wasMousePressed = mouseManager.isLeftPressed();
     }
 
     public void setBook(Book book){
         currentBook = book;
+        bookPurchases = new BookPurchases(book);
     }
 
 }

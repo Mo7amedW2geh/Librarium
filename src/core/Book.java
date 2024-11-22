@@ -12,7 +12,7 @@ public class Book implements Serializable {
     private final String name;
     private final String category;
     private final String description;
-    private int quantity;
+    public int quantity, borrowed = 0;
 
     private String imagePath;
     private transient BufferedImage image;
@@ -46,16 +46,10 @@ public class Book implements Serializable {
         this.image = ImageUtility.scaleImage(image, 240, 300);
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     //Getters
     public String getName() { return name; }
     public String getCategory() { return category; }
     public String getDescription() { return description; }
     public String getImagePath() { return imagePath; }
-    public int getQuantity() { return quantity; }
     public BufferedImage getImage() { return image; }
-
 }
