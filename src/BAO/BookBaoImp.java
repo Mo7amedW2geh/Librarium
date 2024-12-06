@@ -1,12 +1,13 @@
 package BAO;
 
 import DAO.BookDAO;
+import DAO.DAOFactory;
 import DTO.BookDTO;
 
 import java.util.List;
 
 public class BookBaoImp implements BookBAO{
-
+    private BookDAO bookDAO = new DAOFactory().getBookDAO();
     public void insert(BookDAO book) {
 
     }
