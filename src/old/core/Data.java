@@ -1,4 +1,4 @@
-package core;
+package old.core;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,7 +27,6 @@ public class Data {
     public static void saveBooksToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("books.dat"))) {
             oos.writeObject(books);
-            System.out.println("Books saved successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,15 +34,15 @@ public class Data {
 
     // Load default books (initial setup if no file exists)
     private static void loadDefaultBooks() {
-        new Book("Book1", "Mystery", "des", 7, "/books/Book1.png");
-        new Book("Book2", "Mystery", "des", 7, "/books/Book2.png");
+        new Book("Book1", "Mystery", "des", 14, "/books/Book1.png");
+        new Book("Book2", "Mystery", "des", 9, "/books/Book2.png");
         new Book("Get in Trouble", "Fantasy", "A collection of short stories in which a writer with a fertile and often fabulist imagination", 7, "/books/Book3.png");
-        new Book("Book4", "Fantasy", "des", 7, "/books/Book4.png");
-        new Book("Book5", "Fantasy", "des", 7);
-        new Book("Book6", "Fantasy", "des", 7);
-        new Book("Book7", "Fantasy", "des", 7);
-        new Book("Book8", "Fantasy", "des", 7);
-        new Book("Book9", "Fantasy", "des", 7);
+        new Book("Book4", "Fantasy", "des", 11, "/books/Book4.png");
+        new Book("Book5", "Fantasy", "des", 30);
+        new Book("Book6", "Fantasy", "des", 22);
+        new Book("Book7", "Fantasy", "des", 13);
+        new Book("Book8", "Fantasy", "des", 26);
+        new Book("Book9", "Fantasy", "des", 18);
         saveBooksToFile(); // Save defaults on first run
     }
 

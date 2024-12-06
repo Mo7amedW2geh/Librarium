@@ -1,6 +1,6 @@
-package core;
+package old.core;
 
-import utils.ImageUtility;
+import old.utils.ImageUtility;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;

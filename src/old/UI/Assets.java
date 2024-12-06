@@ -1,6 +1,6 @@
-package UI;
+package old.UI;
 
-import utils.ImageUtility;
+import old.utils.ImageUtility;
 
 import java.awt.Font;
 import java.awt.image.BufferedImage;

@@ -1,8 +1,8 @@
-package UI;
+package old.UI;
 
 
-import core.Main;
-import input.MouseManager;
+import old.core.Main;
+import old.input.MouseManager;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

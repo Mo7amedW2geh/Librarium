@@ -1,8 +1,8 @@
-package core;
+package old.core;
 
-import UI.Display;
-import UI.Screen;
-import input.MouseManager;
+import old.UI.Display;
+import old.UI.Screen;
+import old.input.MouseManager;
 
 public class Main implements Runnable {
     private final Display display;

@@ -1,6 +1,4 @@
-package core;
-
-import UI.Display;
+package old.core;
 
 public class Launcher {
     public static void main(String[] args) {

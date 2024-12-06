@@ -1,4 +1,6 @@
-package core;
+package old.core;
+
+import javax.swing.JOptionPane;
 
 public class BookPurchases implements Purchases {
     private Book book;
@@ -22,7 +24,7 @@ public class BookPurchases implements Purchases {
         if(checkQuantity(quantity))
             book.quantity -= quantity;
         else
-            System.out.println("There is no enough quantity");
+            JOptionPane.showMessageDialog(null, "There is no enough quantity");
 
         Data.saveBooksToFile();
     }
@@ -32,7 +34,7 @@ public class BookPurchases implements Purchases {
         if(checkQuantity(1))
             book.borrowed++;
         else
-            System.out.println("There is no enough quantity");
+            JOptionPane.showMessageDialog(null, "There is no enough quantity");
 
         Data.saveBooksToFile();
     }
@@ -42,7 +44,7 @@ public class BookPurchases implements Purchases {
         if(book.borrowed > 0)
             book.borrowed--;
         else
-            System.out.println("There is no borrowed books");
+            JOptionPane.showMessageDialog(null, "There is no borrowed books");
     }
 
     private boolean checkQuantity(int quantity){

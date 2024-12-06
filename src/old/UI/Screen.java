@@ -1,15 +1,15 @@
-package UI;
+package old.UI;
 
-import core.Book;
-import core.BookPurchases;
-import core.Data;
-import input.MouseManager;
+import old.core.Book;
+import old.core.BookPurchases;
+import old.core.Data;
+import old.input.MouseManager;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import static UI.Assets.*;
+import static old.UI.Assets.*;
 
 public class Screen {
     //Screen Settings
