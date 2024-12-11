@@ -5,29 +5,70 @@ import DTO.BookDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDaoImp implements BookDAO{
-    private List<BookDTO> books =new ArrayList<>();
+public class BookDaoImp implements BookDAO {
+
+    private final List<BookDTO> books = new ArrayList<>();
+
     public boolean save(BookDTO item) {
-        try {
-            boolean isExist = false;
-            for (int i = 0; i < books.size() ; i++) {
-                if (books.get(i).getName().equalsIgnoreCase(item.getName())){
-                    isExist = true;
-                    books.add(i,item);
+        int index = getIndex(item.getName());
+
+        if(index == -2) {
+            return false;
+        } else if (index != -1) {
+            books.add(index,item);
+        } else
+            books.add(item);
+        return true;
+    }
+
+    public boolean delete(String name) {
+        int index = getIndex(name);
+
+        if(index < 0)
+            return false;
+        books.remove(index);
+        return true;
+    }
+
+    public int updateQuantity(int quantity, String name) {
+        int index = getIndex(name);
+        if(index < 0) return 1; //Error occurred
+        BookDTO book = books.get(index);
+
+        if(quantity < 0 && (book.getQuantity() - book.getBorrowed()) < -quantity) return 2; //Quantity not Enough
+        book.updateQuantity(quantity);
+        return 0; //Book borrowed
+    }
+
+    public int updateBorrowed(int quantity ,String name) {
+        int index = getIndex(name);
+        if(index < 0) return 1; //Error occurred
+        BookDTO book = books.get(index);
+
+        if(book.getQuantity() - book.getBorrowed() < quantity) return 2; //Quantity not Enough
+        book.updateBorrowed(quantity);
+        return 0; //Book borrowed
+    }
+
+    public void changeImage(String name) {
+
+    }
+
+    private int getIndex(String name) {
+        int index = -1;
+        try{
+            for (int i = 0; i < books.size(); i++) {
+                if(books.get(i).getName().equalsIgnoreCase(name)) {
+                    index = i;
                     break;
                 }
             }
-            if (!isExist)
-                books.add(item);
-        }catch (Exception e){
-            return false;
+        } catch (Exception e){
+            return -2;
         }
-        return false;
+        return index;
     }
 
-    public void delete(){
-
-    }
     public List<BookDTO> listAll() {
         return books;
     }

@@ -12,7 +12,7 @@ public class Main implements Runnable {
     private final MouseManager mouseManager = new MouseManager();
     public Screen screen = new Screen(mouseManager);
 
-    //Main panel
+    //Luncher panel
     public Main() {
         display = new Display("Library", 940, 540, this);
         display.addMouseListener(mouseManager);

@@ -46,16 +46,16 @@ public class BookDTO {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void updateQuantity(int quantity) {
+        this.quantity += quantity;
     }
 
     public int getBorrowed() {
         return borrowed;
     }
 
-    public void setBorrowed(int borrowed) {
-        this.borrowed = borrowed;
+    public void updateBorrowed(int borrowed) {
+        this.borrowed += borrowed;
     }
 
     public BufferedImage getImage() {
