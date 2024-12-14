@@ -9,7 +9,7 @@ public class Data {
 
     // Load books from file
     public static void loadBooksFromFile() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("books.dat"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("oldBooks.dat"))) {
             books = (HashMap < String, ArrayList < Book >>) ois.readObject();
             for(ArrayList<Book> value : books.values()){
                 for(Book book : value){
@@ -25,7 +25,7 @@ public class Data {
 
     // Save books to file
     public static void saveBooksToFile() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("books.dat"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("oldBooks.dat"))) {
             oos.writeObject(books);
         } catch (IOException e) {
             e.printStackTrace();

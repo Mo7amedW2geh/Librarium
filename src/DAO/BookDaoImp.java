@@ -1,13 +1,15 @@
 package DAO;
 
 import DTO.BookDTO;
+import Data.BookRepository;
+import old.core.Book;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookDaoImp implements BookDAO {
 
-    private final List<BookDTO> books = new ArrayList<>();
+    private static final List<BookDTO> books = BookRepository.loadBooks();
 
     public boolean save(BookDTO item) {
         int index = getIndex(item.getName());
@@ -18,6 +20,8 @@ public class BookDaoImp implements BookDAO {
             books.add(index,item);
         } else
             books.add(item);
+
+        BookRepository.saveBooks();
         return true;
     }
 
@@ -27,6 +31,8 @@ public class BookDaoImp implements BookDAO {
         if(index < 0)
             return false;
         books.remove(index);
+
+        BookRepository.saveBooks();
         return true;
     }
 
@@ -37,6 +43,8 @@ public class BookDaoImp implements BookDAO {
 
         if(quantity < 0 && (book.getQuantity() - book.getBorrowed()) < -quantity) return 2; //Quantity not Enough
         book.updateQuantity(quantity);
+
+        BookRepository.saveBooks();
         return 0; //Book borrowed
     }
 
@@ -47,6 +55,8 @@ public class BookDaoImp implements BookDAO {
 
         if(book.getQuantity() - book.getBorrowed() < quantity) return 2; //Quantity not Enough
         book.updateBorrowed(quantity);
+
+        BookRepository.saveBooks();
         return 0; //Book borrowed
     }
 

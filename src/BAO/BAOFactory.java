@@ -1,7 +1,7 @@
 package BAO;
 
 public class BAOFactory {
-    public BookBAO getBookBAO(){
+    public static BookBAO getBookBAO(){
         return new BookBaoImp();
     }
 }

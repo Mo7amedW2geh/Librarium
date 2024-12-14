@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BookBaoImp implements BookBAO {
 
-    private final BookDAO bookDAO = new DAOFactory().getBookDAO();
+    private final BookDAO bookDAO = DAOFactory.getBookDAO();
 
     public boolean insert(BookDTO book) {
         return bookDAO.save(book);

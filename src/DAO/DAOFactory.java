@@ -1,7 +1,7 @@
 package DAO;
 
 public class DAOFactory {
-    public BookDAO getBookDAO() {
+    public static BookDAO getBookDAO() {
         return new BookDaoImp();
     }
 }

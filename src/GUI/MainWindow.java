@@ -1,9 +1,18 @@
 package GUI;
 
-import javax.swing.JFrame;
+import BAO.BAOFactory;
+import BAO.BookBAO;
+import DTO.BookDTO;
+
+import javax.swing.*;
+import java.awt.CardLayout;
+import java.awt.GridLayout;
+import java.util.List;
 
 public class MainWindow {
+    private final BookBAO bookBAO = BAOFactory.getBookBAO();
     private JFrame window;
+    private BooksPanel booksPanel;
 
     public MainWindow(){
         initialize();
@@ -14,8 +23,13 @@ public class MainWindow {
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setSize(960, 540);
         window.setLocationRelativeTo(null);
+        window.setLayout(new CardLayout());
 
+        booksPanel = new BooksPanel(bookBAO.listAll());
 
+        JScrollPane scrollPane = new JScrollPane(booksPanel);
+
+        window.add(scrollPane);
     }
 
     public void show(){
