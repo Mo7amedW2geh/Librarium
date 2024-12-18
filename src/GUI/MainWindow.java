@@ -6,8 +6,6 @@ import DTO.BookDTO;
 
 import javax.swing.*;
 import java.awt.CardLayout;
-import java.awt.GridLayout;
-import java.util.List;
 
 public class MainWindow {
     private final BookBAO bookBAO = BAOFactory.getBookBAO();
@@ -20,7 +18,7 @@ public class MainWindow {
 
     private void initialize(){
         window = new JFrame("Main Window");
-        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(960, 540);
         window.setLocationRelativeTo(null);
         window.setLayout(new CardLayout());

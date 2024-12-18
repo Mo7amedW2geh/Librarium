@@ -4,6 +4,10 @@ import DTO.BookDTO;
 import Data.BookRepository;
 import old.core.Book;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,10 +64,32 @@ public class BookDaoImp implements BookDAO {
         return 0; //Book borrowed
     }
 
-    public void changeImage(String name) {
+    public int changeImage(String path, String name) {
+        int index = getIndex(name);
+        if(index < 0) return 1; //Error occurred
+        BookDTO book = books.get(index);
 
+        setImage(path, name);
+        BookRepository.saveBooks();
+        return 0;
     }
 
+    private void setImage(String path, String name) {
+        File sourceFile = new File(path);
+        if (!sourceFile.exists()) {
+            return;
+        }
+
+        try {
+            // Create the destination file in the res folder with the book name
+            File destinationFile = new File(new File("res/books"), name + ".png");
+
+            // Copy the file to the destination
+            Files.copy(sourceFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private int getIndex(String name) {
         int index = -1;
         try{

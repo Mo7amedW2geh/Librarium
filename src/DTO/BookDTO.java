@@ -1,12 +1,14 @@
 package DTO;
 
+import utils.ImageUtility;
+
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 
 public class BookDTO {
 
     private String name, description, author, category;
     private int quantity, borrowed;
-    private BufferedImage image;
 
 
 
@@ -59,10 +61,8 @@ public class BookDTO {
     }
 
     public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
+        BufferedImage cover = ImageUtility.loadImage(name + ".png");
+        if(cover == null) return ImageUtility.loadImage("Default_Book_Image.png");
+        return cover;
     }
 }

@@ -9,6 +9,6 @@ public interface BookDAO {
     boolean delete(String name);
     int updateQuantity(int quantity, String name);
     int updateBorrowed(int quantity ,String name);
-    void changeImage(String name);
+    int changeImage(String path, String name);
     List<BookDTO> listAll();
 }

@@ -1,6 +1,7 @@
 package GUI;
 
 import DTO.BookDTO;
+import utils.ImageUtility;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -28,7 +29,7 @@ public class BooksPanel extends JPanel {
         this.add(insertPanel);
 
         for(BookDTO b : books){
-            JLabel label = new JLabel(new ImageIcon(b.getImage()));
+            JLabel label = new JLabel(new ImageIcon(ImageUtility.scaleImage(b.getImage(), 160, 220)));
             label.setToolTipText(b.getName());
 
             label.addMouseListener(new MouseAdapter() {
