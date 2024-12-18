@@ -4,14 +4,22 @@ import javax.swing.*;
 
 public class InsertWindow1 {
     private JPanel window;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JComboBox comboBox1;
-    private JSpinner spinner1;
-    private JTextArea textArea1;
-    private JButton button1;
+    private JTextField titleField;
+    private JTextField authorField;
+    private JComboBox descriptionComboBox;
+    private JSpinner quantitySpinner;
+    private JTextArea descriptionArea;
+    private JButton insertButton;
+    private JScrollPane descriptionScrollPane;
 
     public JPanel getWindow() {
         return window;
+    }
+
+    private void createUIComponents() {
+
+        //Quantity
+        quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 0, Integer.MAX_VALUE, 1));
+
     }
 }
