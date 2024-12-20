@@ -2,14 +2,29 @@ package DTO;
 
 import utils.ImageUtility;
 
+import javax.swing.ImageIcon;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.Serializable;
+import java.util.Objects;
 
-public class BookDTO {
+public class BookDTO implements Serializable {
 
     private String name, description, author, category;
     private int quantity, borrowed;
 
+
+    public BookDTO(){
+    }
+
+    public BookDTO(String name, String author, String category, String description, int quantity){
+        this.name = name;
+        this.author = author;
+        this.category = category;
+        this.description = description;
+        this.quantity = quantity;
+    }
 
 
     public String getName() {
@@ -60,9 +75,9 @@ public class BookDTO {
         this.borrowed += borrowed;
     }
 
-    public BufferedImage getImage() {
-        BufferedImage cover = ImageUtility.loadImage(name + ".png");
-        if(cover == null) return ImageUtility.loadImage("Default_Book_Image.png");
-        return cover;
+    public Image getImage() {
+        BufferedImage image = ImageUtility.loadImage("/books/" + name + ".png");
+        if(image == null) image = ImageUtility.loadImage("/books/Default_Book_Image.png");
+        return new ImageIcon(Objects.requireNonNull(image)).getImage();
     }
 }

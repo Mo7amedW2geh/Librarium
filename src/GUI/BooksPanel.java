@@ -1,23 +1,19 @@
 package GUI;
 
 import DTO.BookDTO;
-import utils.ImageUtility;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.CardLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BooksPanel extends JPanel {
     private final InsertPanel insertPanel = new InsertPanel();
-    private List<BookDTO> books;
+    private final List<BookDTO> books;
 
     public BooksPanel(List<BookDTO> books) {
         this.books = books;
@@ -29,7 +25,8 @@ public class BooksPanel extends JPanel {
         this.add(insertPanel);
 
         for(BookDTO b : books){
-            JLabel label = new JLabel(new ImageIcon(ImageUtility.scaleImage(b.getImage(), 160, 220)));
+            Image image = b.getImage().getScaledInstance(160, 220, Image.SCALE_SMOOTH);
+            JLabel label = new JLabel(new ImageIcon(image));
             label.setToolTipText(b.getName());
 
             label.addMouseListener(new MouseAdapter() {

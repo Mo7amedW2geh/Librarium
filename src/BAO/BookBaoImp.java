@@ -30,8 +30,8 @@ public class BookBaoImp implements BookBAO {
         return bookDAO.delete(name);
     }
 
-    public void changeImage(String name) {
-
+    public void changeImage(String path,String name) {
+        bookDAO.changeImage(path, name);
     }
 
     public List<BookDTO> listAll() {

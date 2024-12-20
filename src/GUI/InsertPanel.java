@@ -1,15 +1,11 @@
 package GUI;
 
-import utils.ImageUtility;
-
 import javax.swing.*;
-import javax.swing.text.Utilities;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Objects;
 
 public class InsertPanel extends JPanel {
 

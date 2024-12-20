@@ -12,7 +12,7 @@ public interface BookBAO {
     int borrow(int quantity ,String name);
     int reStock(int quantity, String name);
     boolean delete(String name);
-    void changeImage(String name);
+    void changeImage(String path ,String name);
     List<BookDTO> listAll();
 
 }

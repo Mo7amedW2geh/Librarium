@@ -10,9 +10,9 @@ import java.util.List;
 
 public class BookRepository {
     private static final BookBAO bookBAO = BAOFactory.getBookBAO();
-    private static List<BookDTO> books;
 
     public static List<BookDTO> loadBooks() {
+        List<BookDTO> books;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("books.dat"))) {
             books = (List<BookDTO>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {

@@ -11,9 +11,8 @@ public class ImageUtility {
         try{
             return ImageIO.read(Objects.requireNonNull(ImageUtility.class.getResourceAsStream(path)));
         }catch(Exception e){
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public static BufferedImage scaleImage(BufferedImage original, int width, int height) {
