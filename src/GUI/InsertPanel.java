@@ -8,8 +8,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class InsertPanel extends JPanel {
+    private BooksPanel booksPanel;
 
-    public InsertPanel() {
+    public InsertPanel(BooksPanel booksPanel) {
+        this.booksPanel = booksPanel;
         initialize();
     }
 
@@ -21,7 +23,7 @@ public class InsertPanel extends JPanel {
         JLabel Image = new JLabel(new ImageIcon(Assets.addBookImage));
         Image.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                SwingUtilities.invokeLater(() -> new InsertWindow().display());
+                SwingUtilities.invokeLater(() -> new InsertWindow(booksPanel).display());
             }
         });
 

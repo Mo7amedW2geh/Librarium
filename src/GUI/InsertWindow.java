@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class InsertWindow extends JFrame {
+    private BooksPanel booksPanel;
     private final BookBAO bookBAO = BAOFactory.getBookBAO();
     private JPanel window;
     private JTextField titleField;
@@ -26,7 +27,8 @@ public class InsertWindow extends JFrame {
     private JLabel imageLabel;
     private String imagePath;
 
-    public InsertWindow() {
+    public InsertWindow(BooksPanel booksPanel) {
+        this.booksPanel = booksPanel;
         this.setTitle("Insert Window");
         this.setContentPane(window);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -82,6 +84,10 @@ public class InsertWindow extends JFrame {
                 bookBAO.insert(book);
                 if(imagePath != null)
                     bookBAO.changeImage(imagePath ,title);
+
+                booksPanel.insertBook(book, (imagePath == null) ? null : new ImageIcon(imagePath));
+                booksPanel.revalidate();
+                booksPanel.repaint();
 
                 dispose();
             }
