@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookRepository {
+
     private static final BookBAO bookBAO = BAOFactory.getBookBAO();
 
     public static List<BookDTO> loadBooks() {
@@ -28,6 +29,5 @@ public class BookRepository {
             e.printStackTrace();
         }
     }
-
 
 }

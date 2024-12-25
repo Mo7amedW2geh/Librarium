@@ -17,6 +17,7 @@ public class BooksPanel extends JPanel {
     private final List<BookDTO> books;
     private final JPanel booksPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
 
+
     public BooksPanel(MainWindow window) {
         this.window = window;
         this.books = window.bookBAO.listAll();
@@ -47,7 +48,7 @@ public class BooksPanel extends JPanel {
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                window.showDetailPanel();
+                window.showDetailPanel(book);
             }
         });
 
@@ -59,5 +60,10 @@ public class BooksPanel extends JPanel {
         int rows = (books.size()) / 5 + 1;
         int height = rows * 240;
         booksPanel.setPreferredSize(new Dimension(890, height));
+    }
+
+    void setImage(boolean imageFirstAdd, String imagePath) {
+        window.imageFirstAdd = imageFirstAdd;
+        window.imagePath = imagePath;
     }
 }

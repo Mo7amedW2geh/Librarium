@@ -11,9 +11,11 @@ public class MainWindow {
     final BookBAO bookBAO = BAOFactory.getBookBAO();
     private JFrame window;
     private BooksPanel booksPanel;
-    private JPanel detailPanel;
+    private DetailPanel detailPanel;
     private CardLayout cardLayout;
     private JPanel cardPanel;
+    boolean imageFirstAdd;
+    String imagePath;
 
     public MainWindow(){
         initialize();
@@ -21,6 +23,7 @@ public class MainWindow {
 
     private void initialize(){
         window = new JFrame("Main Window");
+        window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(890, 540);
         window.setLocationRelativeTo(null);
@@ -29,10 +32,10 @@ public class MainWindow {
         cardPanel = new JPanel(cardLayout);
 
         booksPanel = new BooksPanel(this);
-        detailPanel = new DetailPanel(new BookDTO()).getDetailPanel();
+        detailPanel = new DetailPanel(this);
 
         cardPanel.add(booksPanel, "booksPanel");
-        cardPanel.add(detailPanel, "detailPanel");
+        cardPanel.add(detailPanel.getDetailPanel(), "detailPanel");
         cardLayout.show(cardPanel, "booksPanel");
 
         window.add(cardPanel);
@@ -42,7 +45,12 @@ public class MainWindow {
         window.setVisible(true);
     }
 
-    public void showDetailPanel() {
+    public void showDetailPanel(BookDTO book) {
         cardLayout.show(cardPanel, "detailPanel");
+        detailPanel.setBook(book);
+    }
+
+    public void showBooksPanel() {
+        cardLayout.show(cardPanel, "booksPanel");
     }
 }
