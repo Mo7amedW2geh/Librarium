@@ -5,14 +5,14 @@ import utils.ImageUtility;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class BookDTO implements Serializable {
 
-    private String name, description, author, category;
+    private String name, description, author, category, newImagePath;
     private int quantity, borrowed;
+    private boolean firstAdd;
 
 
     public BookDTO(){
@@ -63,6 +63,22 @@ public class BookDTO implements Serializable {
         return quantity;
     }
 
+    public String getNewImagePath() {
+        return newImagePath;
+    }
+
+    public void setNewImagePath(String newImagePath) {
+        this.newImagePath = newImagePath;
+    }
+
+    public boolean isFirstAdd() {
+        return firstAdd;
+    }
+
+    public void setFirstAdd(boolean firstAdd) {
+        this.firstAdd = firstAdd;
+    }
+
     public void updateQuantity(int quantity) {
         this.quantity += quantity;
     }
@@ -76,7 +92,7 @@ public class BookDTO implements Serializable {
     }
 
     public Image getImage() {
-        BufferedImage image = ImageUtility.loadImage("/books/" + name + ".png");
+        BufferedImage image = ImageUtility.loadImage("/books/" + name + "_" + author + ".png");
         if(image == null) image = ImageUtility.loadImage("/books/Default_Book_Image.png");
         return new ImageIcon(Objects.requireNonNull(image)).getImage();
     }

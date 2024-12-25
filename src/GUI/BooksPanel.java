@@ -21,6 +21,8 @@ public class BooksPanel extends JPanel {
     public BooksPanel(MainWindow window) {
         this.window = window;
         this.books = window.bookBAO.listAll();
+        window.setupDetailPanel(booksPanel);
+
         initialize();
     }
 
@@ -51,7 +53,6 @@ public class BooksPanel extends JPanel {
                 window.showDetailPanel(book);
             }
         });
-
         booksPanel.add(label);
         updatePreferredSize();
     }
@@ -60,10 +61,5 @@ public class BooksPanel extends JPanel {
         int rows = (books.size()) / 5 + 1;
         int height = rows * 240;
         booksPanel.setPreferredSize(new Dimension(890, height));
-    }
-
-    void setImage(boolean imageFirstAdd, String imagePath) {
-        window.imageFirstAdd = imageFirstAdd;
-        window.imagePath = imagePath;
     }
 }

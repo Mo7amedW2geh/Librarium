@@ -57,24 +57,24 @@ public class BookDaoImp implements BookDAO {
         if(index < 0) return 1; //Error occurred
         BookDTO book = books.get(index);
 
-        if(book.getQuantity() - book.getBorrowed() < quantity) return 2; //Quantity not Enough
+        if(quantity > 0 && (book.getQuantity() - book.getBorrowed() < quantity) || (quantity < 0 && -quantity > book.getBorrowed())) return 2; //Quantity not Enough
         book.updateBorrowed(quantity);
 
         BookRepository.saveBooks();
         return 0; //Book borrowed
     }
 
-    public int changeImage(String path, String name) {
+    public int changeImage(String path, String name, String author) {
         int index = getIndex(name);
         if(index < 0) return 1; //Error occurred
         BookDTO book = books.get(index);
 
-        setImage(path, name);
+        setImage(path, name, author);
         BookRepository.saveBooks();
         return 0;
     }
 
-    private void setImage(String path, String name) {
+    private void setImage(String path, String name, String author) {
         File sourceFile = new File(path);
         if (!sourceFile.exists()) {
             return;
@@ -82,7 +82,7 @@ public class BookDaoImp implements BookDAO {
 
         try {
             // Create the destination file in the res folder with the book name
-            File destinationFile = new File(new File("res/books"), name + ".png");
+            File destinationFile = new File(new File("res/books"), name + "_" + author + ".png");
 
             // Copy the file to the destination
             Files.copy(sourceFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -90,7 +90,7 @@ public class BookDaoImp implements BookDAO {
             e.printStackTrace();
         }
     }
-    private int getIndex(String name) {
+    public int getIndex(String name) {
         int index = -1;
         try{
             for (int i = 0; i < books.size(); i++) {
@@ -107,5 +107,11 @@ public class BookDaoImp implements BookDAO {
 
     public List<BookDTO> listAll() {
         return books;
+    }
+
+    static {
+        for(BookDTO book : books) {
+            book.setFirstAdd(false);
+        }
     }
 }

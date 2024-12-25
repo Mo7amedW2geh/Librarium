@@ -82,11 +82,11 @@ public class InsertWindow extends JFrame {
 
                 BookDTO book = new BookDTO(title, author, category, description, quantity);
                 bookBAO.insert(book);
+
                 if(imagePath != null) {
-                    booksPanel.setImage(true, imagePath);
-                    bookBAO.changeImage(imagePath ,title);
-                } else {
-                    booksPanel.setImage(false, null);
+                    book.setFirstAdd(true);
+                    bookBAO.changeImage(imagePath ,title, author);
+                    book.setNewImagePath(imagePath);
                 }
 
 

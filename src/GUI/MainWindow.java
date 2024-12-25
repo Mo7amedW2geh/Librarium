@@ -14,8 +14,6 @@ public class MainWindow {
     private DetailPanel detailPanel;
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    boolean imageFirstAdd;
-    String imagePath;
 
     public MainWindow(){
         initialize();
@@ -30,11 +28,10 @@ public class MainWindow {
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
-
         booksPanel = new BooksPanel(this);
-        detailPanel = new DetailPanel(this);
 
         cardPanel.add(booksPanel, "booksPanel");
+        assert detailPanel != null;
         cardPanel.add(detailPanel.getDetailPanel(), "detailPanel");
         cardLayout.show(cardPanel, "booksPanel");
 
@@ -52,5 +49,9 @@ public class MainWindow {
 
     public void showBooksPanel() {
         cardLayout.show(cardPanel, "booksPanel");
+    }
+
+    public void setupDetailPanel(JPanel booksPanel) {
+        detailPanel = new DetailPanel(this, booksPanel);
     }
 }

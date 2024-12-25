@@ -18,8 +18,12 @@ public class BookBaoImp implements BookBAO {
         return bookDAO.updateQuantity(-quantity, name);
     }
 
-    public int borrow(int quantity ,String name) {
+    public int borrow(int quantity, String name) {
         return bookDAO.updateBorrowed(quantity, name);
+    }
+
+    public int returnBook(int quantity, String name) {
+        return bookDAO.updateBorrowed(-quantity, name);
     }
 
     public int reStock(int quantity, String name) {
@@ -30,8 +34,12 @@ public class BookBaoImp implements BookBAO {
         return bookDAO.delete(name);
     }
 
-    public void changeImage(String path,String name) {
-        bookDAO.changeImage(path, name);
+    public void changeImage(String path, String name, String author) {
+        bookDAO.changeImage(path, name, author);
+    }
+
+    public int getIndex(String name) {
+        return bookDAO.getIndex(name);
     }
 
     public List<BookDTO> listAll() {
