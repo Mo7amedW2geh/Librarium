@@ -16,12 +16,10 @@ public class DetailPanel {
     private BookDTO book;
     private JPanel detailPanel;
     private JPanel booksPanel;
-    private JButton goBackButton;
     private JLabel imageLabel;
     private JLabel titleLabel;
     private JLabel authorLabel;
     private JLabel categoryPanel;
-    private JLabel descriptionPanel;
     private JButton buyButton;
     private JSpinner buySpinner;
     private JButton borrowButton;

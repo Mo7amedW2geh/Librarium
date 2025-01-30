@@ -3,10 +3,7 @@ package GUI;
 import DTO.BookDTO;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -28,8 +25,9 @@ public class BooksPanel extends JPanel {
 
     private void initialize() {
         this.setLayout(new BorderLayout());
-        booksPanel.add(insertPanel);
+        booksPanel.add(insertPanel); //Insert Panel
 
+        //Books
         for(BookDTO b : books){
             insertBook(b, null);
         }
@@ -43,7 +41,7 @@ public class BooksPanel extends JPanel {
     }
 
     void insertBook(BookDTO book, ImageIcon icon){
-        Image image = (icon == null) ? book.getImage() : icon.getImage();
+        Image image = (icon == null) ? book.getImage() : icon.getImage(); //check book is new or not
         JLabel label = new JLabel(new ImageIcon(image.getScaledInstance(160, 220, Image.SCALE_SMOOTH)));
         label.setToolTipText(book.getName());
 

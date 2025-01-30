@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class InsertWindow extends JFrame {
+public class InsertWindow extends JDialog {
     private BooksPanel booksPanel;
     private final BookBAO bookBAO = BAOFactory.getBookBAO();
     private JPanel window;
@@ -28,8 +28,8 @@ public class InsertWindow extends JFrame {
     private String imagePath;
 
     public InsertWindow(BooksPanel booksPanel) {
+        super((JFrame) null, "Insert Window", true);
         this.booksPanel = booksPanel;
-        this.setTitle("Insert Window");
         this.setContentPane(window);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(600, 360);
@@ -90,7 +90,7 @@ public class InsertWindow extends JFrame {
                 }
 
 
-                booksPanel.insertBook(book, (imagePath == null) ? null : new ImageIcon(imagePath));
+                booksPanel.insertBook(book, (imagePath == null) ? null : new ImageIcon(imagePath)); //check image inserted or not
                 booksPanel.revalidate();
                 booksPanel.repaint();
 
@@ -105,7 +105,6 @@ public class InsertWindow extends JFrame {
     private void createUIComponents() {
         //Quantity
         quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 0, Integer.MAX_VALUE, 1));
-
 
     }
 

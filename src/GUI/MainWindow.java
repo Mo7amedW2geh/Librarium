@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.CardLayout;
 
 public class MainWindow {
+
     final BookBAO bookBAO = BAOFactory.getBookBAO();
     private JFrame window;
     private BooksPanel booksPanel;
@@ -26,12 +27,12 @@ public class MainWindow {
         window.setSize(890, 540);
         window.setLocationRelativeTo(null);
 
+        booksPanel = new BooksPanel(this);
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
-        booksPanel = new BooksPanel(this);
 
-        cardPanel.add(booksPanel, "booksPanel");
         assert detailPanel != null;
+        cardPanel.add(booksPanel, "booksPanel");
         cardPanel.add(detailPanel.getDetailPanel(), "detailPanel");
         cardLayout.show(cardPanel, "booksPanel");
 

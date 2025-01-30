@@ -2,13 +2,11 @@ package DAO;
 
 import DTO.BookDTO;
 import Data.BookRepository;
-import old.core.Book;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookDaoImp implements BookDAO {
@@ -90,6 +88,7 @@ public class BookDaoImp implements BookDAO {
             e.printStackTrace();
         }
     }
+
     public int getIndex(String name) {
         int index = -1;
         try{

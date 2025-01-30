@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class InsertPanel extends JPanel {
-    private BooksPanel booksPanel;
+    private final BooksPanel booksPanel;
 
     public InsertPanel(BooksPanel booksPanel) {
         this.booksPanel = booksPanel;
